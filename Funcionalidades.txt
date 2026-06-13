@@ -1,0 +1,31 @@
+Laura Barrera 
+Leonardo Garavito 
+Yeny Silva 
+Laura Rojas
+
+RQF001 Registro de usuario
+RQF002 Gestión de usuarios
+RQF003 Asignación de rol
+RQF004 Inicio de sesión
+RQF005 Cierre de sesión
+RQF006 Historial de actividad
+RQF007 Registro de productos
+RQF008 Gestión de productos
+RQF009 Consulta de inventario
+RQF010 Alertas automáticas
+RQF011 Registro de movimientos
+RQF012 Registro de nuevas entradas
+RQF013 Actualización automática
+RQF014 Historial de entradas
+RQF015 Alertas de agotamiento
+RQF016 Configuración de alertas
+RQF017 Catálogo de productos
+RQF018 Búsqueda de productos
+RQF019 Cotización por WhatsApp
+RQF020 Productos favoritos
+RQF021 Registro de ventas
+RQF022 Reporte semanal/mensual
+RQF023 Cálculo de ganancias
+RQF024 Registro de máquinas
+RQF025 Historial de mantenimiento
+RQF026 Conexión a internet
