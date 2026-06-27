@@ -1,0 +1,575 @@
+<!doctype html>
+
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>INDUSTRIAL_OPS - Registro de Usuario</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind Theme Configuration -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-surface": "#2e3135",
+              "on-primary-fixed-variant": "#5a4300",
+              "primary-fixed": "#ffdf9a",
+              "on-primary-fixed": "#251a00",
+              "surface-bright": "#f8f9ff",
+              "surface-container-lowest": "#ffffff",
+              tertiary: "#505f76",
+              "on-tertiary-fixed-variant": "#38485d",
+              error: "#ba1a1a",
+              "tertiary-fixed": "#d3e4fe",
+              "outline-variant": "#d3c5ac",
+              "on-secondary-container": "#596373",
+              background: "#f8f9ff",
+              "tertiary-fixed-dim": "#b7c8e1",
+              "on-secondary-fixed-variant": "#3d4756",
+              "surface-container-highest": "#e1e2e8",
+              "on-surface-variant": "#4f4633",
+              "on-secondary-fixed": "#121c2a",
+              "inverse-primary": "#f7be1d",
+              "on-primary": "#ffffff",
+              "surface-container": "#eceef3",
+              "tertiary-container": "#acbcd6",
+              secondary: "#555f6f",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e1e2e8",
+              surface: "#f8f9ff",
+              "on-error-container": "#93000a",
+              "secondary-fixed": "#d9e3f6",
+              primary: "#785a00",
+              "on-background": "#191c20",
+              "on-primary-container": "#604700",
+              "on-tertiary-fixed": "#0b1c30",
+              "on-error": "#ffffff",
+              "surface-dim": "#d8dae0",
+              "secondary-fixed-dim": "#bdc7d9",
+              "error-container": "#ffdad6",
+              "surface-tint": "#785a00",
+              "surface-container-high": "#e7e8ee",
+              "on-surface": "#191c20",
+              "surface-container-low": "#f2f3f9",
+              "on-tertiary-container": "#3c4c61",
+              "primary-container": "#eab308",
+              "inverse-on-surface": "#eff0f6",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              unit: "4px",
+              gutter: "24px",
+              "container-max": "1440px",
+              "margin-edge": "32px",
+            },
+            fontFamily: {
+              "label-sm": ["JetBrains Mono"],
+              "body-lg": ["IBM Plex Sans"],
+              "headline-xl": ["IBM Plex Sans"],
+              "headline-md": ["IBM Plex Sans"],
+              "body-md": ["IBM Plex Sans"],
+              "label-md": ["JetBrains Mono"],
+              "headline-lg": ["IBM Plex Sans"],
+            },
+            fontSize: {
+              "label-sm": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "label-md": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+      }
+      .step-active {
+        border-color: #eab308;
+        background-color: #eab308;
+        color: #000;
+      }
+      .step-inactive {
+        border-color: #d3c5ac;
+        color: #817660;
+      }
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #eab308 !important;
+        border-width: 2px !important;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-surface-bright text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container"
+  >
+    <!-- Navigation Drawer (SideNav) -->
+    <aside
+      class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-surface-variant flex flex-col py-6 gap-2 z-50"
+    >
+      <div class="px-6 mb-10">
+        <h1
+          class="font-headline-md text-headline-md font-black text-on-surface uppercase tracking-tight"
+        >
+          EQUIPMENT MGR
+        </h1>
+      </div>
+      <nav class="flex-1 flex flex-col gap-1 px-3">
+        <!-- INICIO - ACTIVE -->
+        <a
+          class="flex items-center gap-4 px-4 py-3 text-secondary hover:bg-surface-container transition-all duration-200 group"
+          href="gestiondeusuario.html"
+        >
+          <span class="material-symbols-outlined" data-icon="dashboard"
+            >dashboard</span
+          >
+          <span class="font-label-md text-label-md uppercase tracking-widest"
+            >gestion usuarios</span
+          >
+        </a>
+        <!-- REGISTRO -->
+        <a
+          class="flex items-center gap-4 px-4 py-3 text-secondary hover:bg-surface-container transition-all duration-200 group"
+          href="historialconexion.html"
+        >
+          <span class="material-symbols-outlined" data-icon="person_add"
+            >person_add</span
+          >
+          <span
+            class="font-label-md text-label-md uppercase tracking-widest group-hover:text-on-surface"
+            >historial</span
+          >
+        </a>
+        <!-- GESTIÓN -->
+        <a
+          class="flex items-center gap-4 px-4 py-3 bg-primary text-on-primary font-bold border-l-4 border-on-primary-fixed transition-all duration-200"
+          href="registrosesion.html"
+        >
+          <span
+            class="material-symbols-outlined"
+            data-icon="admin_panel_settings"
+            >registro</span
+          >
+        </a>
+        <!-- HISTORIAL -->
+      </nav>
+      <div class="mt-auto px-6 pt-6 border-t border-surface-variant">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-full bg-surface-container-high border border-outline flex items-center justify-center overflow-hidden"
+          >
+            <img
+              class="w-full h-full object-cover"
+              data-alt="A professional portrait of an industrial site manager wearing a white hard hat and safety glasses, high-key studio lighting, modern minimalist corporate aesthetic with industrial undertones."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeKuGkNgoOhkG5x-aExFrH-gEjNJU0y9W9LGn5fylwUUKlhL71n0j5QqBOVB-pupnCWb9T59KQr3A5Ryvq28w8cJ3QdBrvCxt3m2dtOcVn1UrIihek5hrALRsFNIYmBpijH2Vik0kjrHIdlHCvMJVGHXnOC8B_OZ-5RWAA6Y-XX6Mw0fLtPfc2ieNqfWOfGF5-ngWpKMpmsZ4q5oPzqHL5zFwie0Y0alng7VnZ6-pezWF_8wYn2OJxjLeQX9pp_52VdbFJIh5O4T0"
+            />
+          </div>
+          <div>
+            <p class="text-label-sm font-bold truncate">OP-45229</p>
+            <p class="text-[10px] text-secondary font-label-sm uppercase">
+              Administrador
+            </p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="ml-64 min-h-screen">
+      <!-- Top App Bar -->
+      <header
+        class="w-full sticky top-0 z-40 bg-surface-container-lowest border-b border-surface-variant flex justify-between items-center px-margin-edge h-20"
+      >
+        <div class="flex items-center gap-4">
+          <span
+            class="material-symbols-outlined text-primary text-headline-md"
+            data-icon="precision_manufacturing"
+            >precision_manufacturing</span
+          >
+          <span
+            class="font-headline-md text-headline-md font-bold tracking-tighter text-on-surface"
+            >INDUSTRIAL_OPS</span
+          >
+        </div>
+        <div class="flex items-center gap-6">
+          <div
+            class="hidden md:flex items-center gap-2 px-3 py-1 bg-surface-container-low border border-outline-variant rounded"
+          >
+            <div class="w-2 h-2 rounded-full bg-green-600 animate-pulse"></div>
+            <span class="font-label-sm text-label-sm uppercase"
+              >SISTEMA: OPERATIVO</span
+            >
+          </div>
+          <button
+            class="p-2 hover:bg-surface-container-low transition-colors rounded"
+          >
+            <span class="material-symbols-outlined" data-icon="notifications"
+              >notifications</span
+            >
+          </button>
+        </div>
+      </header>
+      <section class="p-margin-edge max-w-5xl mx-auto">
+        <!-- Header Section -->
+        <div
+          class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6"
+        >
+          <div>
+            <h2
+              class="font-headline-lg text-headline-lg uppercase tracking-tight"
+            >
+              Registro de Nuevo Operador
+            </h2>
+            <p class="text-secondary font-body-md mt-2 max-w-2xl">
+              Ingrese los datos técnicos y credenciales de acceso para el
+              personal de planta. Todos los campos marcados son de carácter
+              obligatorio para la auditoría de seguridad.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 font-label-md">
+            <span class="text-secondary uppercase">ID PROYECTO:</span>
+            <span class="font-bold border-b-2 border-primary-container"
+              >XP-2024-ALPHA</span
+            >
+          </div>
+        </div>
+        <!-- Bento Layout Content -->
+        <div class="grid grid-cols-12 gap-6">
+          <!-- Left Column: Steps Indicator -->
+          <div class="col-span-12 lg:col-span-3">
+            <div
+              class="sticky top-28 bg-white border border-surface-variant p-6 space-y-8"
+            >
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-8 h-8 flex items-center justify-center font-label-md rounded-none border-2 step-active"
+                >
+                  01
+                </div>
+                <span class="font-label-md uppercase tracking-wider font-bold"
+                  >Datos Personales</span
+                >
+              </div>
+              <div class="flex items-center gap-4 opacity-50">
+                <div
+                  class="w-8 h-8 flex items-center justify-center font-label-md rounded-none border-2 step-inactive"
+                >
+                  02
+                </div>
+                <span class="font-label-md uppercase tracking-wider"
+                  >Roles y Planta</span
+                >
+              </div>
+              <div class="flex items-center gap-4 opacity-30">
+                <div
+                  class="w-8 h-8 flex items-center justify-center font-label-md rounded-none border-2 step-inactive"
+                >
+                  03
+                </div>
+                <span class="font-label-md uppercase tracking-wider"
+                  >Seguridad</span
+                >
+              </div>
+              <div class="pt-6 border-t border-surface-variant">
+                <p class="text-label-sm text-secondary uppercase mb-2">
+                  Completitud
+                </p>
+                <div class="h-3 w-full bg-surface-container-high">
+                  <div
+                    class="h-full bg-primary-container"
+                    style="width: 33%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Right Column: Form Sections -->
+          <div class="col-span-12 lg:col-span-9 space-y-6">
+            <!-- Section 1: Personal Info -->
+            <div class="bg-white border border-surface-variant overflow-hidden">
+              <div
+                class="bg-surface-container-low px-6 py-3 border-b border-surface-variant flex items-center justify-between"
+              >
+                <h3
+                  class="font-label-md uppercase font-bold tracking-widest text-on-surface-variant"
+                >
+                  Información de Identidad
+                </h3>
+                <span
+                  class="material-symbols-outlined text-secondary"
+                  data-icon="badge"
+                  >badge</span
+                >
+              </div>
+              <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                <div class="flex flex-col gap-2">
+                  <label
+                    class="font-label-md text-label-md uppercase text-secondary"
+                    >Nombres Completos</label
+                  >
+                  <input
+                    class="bg-white border border-outline p-3 font-body-md text-on-surface focus:ring-0"
+                    placeholder="Ej: JUAN CARLOS"
+                    type="text"
+                  />
+                </div>
+                <div class="flex flex-col gap-2">
+                  <label
+                    class="font-label-md text-label-md uppercase text-secondary"
+                    >Apellidos</label
+                  >
+                  <input
+                    class="bg-white border border-outline p-3 font-body-md text-on-surface focus:ring-0"
+                    placeholder="Ej: PÉREZ GONZÁLEZ"
+                    type="text"
+                  />
+                </div>
+                <div class="flex flex-col gap-2">
+                  <label
+                    class="font-label-md text-label-md uppercase text-secondary"
+                    >Documento de Identidad (ID)</label
+                  >
+                  <input
+                    class="bg-white border border-outline p-3 font-body-md text-on-surface focus:ring-0"
+                    placeholder="Número de identificación"
+                    type="text"
+                  />
+                </div>
+                <div class="flex flex-col gap-2">
+                  <label
+                    class="font-label-md text-label-md uppercase text-secondary"
+                    >Fecha de Ingreso</label
+                  >
+                  <input
+                    class="bg-white border border-outline p-3 font-body-md text-on-surface focus:ring-0"
+                    type="date"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- Section 2: Contact & Visual -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div
+                class="col-span-1 bg-white border border-surface-variant flex flex-col"
+              >
+                <div
+                  class="bg-surface-container-low px-6 py-3 border-b border-surface-variant"
+                >
+                  <h3
+                    class="font-label-md uppercase font-bold text-on-surface-variant"
+                  >
+                    Foto de Perfil
+                  </h3>
+                </div>
+                <div
+                  class="flex-1 p-6 flex flex-col items-center justify-center gap-4"
+                >
+                  <div
+                    class="w-32 h-32 border-2 border-dashed border-outline-variant flex flex-col items-center justify-center bg-surface-container-low"
+                  >
+                    <span
+                      class="material-symbols-outlined text-4xl text-outline"
+                      data-icon="add_a_photo"
+                      >add_a_photo</span
+                    >
+                  </div>
+                  <button
+                    class="text-label-sm uppercase font-bold text-primary hover:underline"
+                  >
+                    Subir Imagen
+                  </button>
+                </div>
+              </div>
+              <div
+                class="col-span-2 bg-white border border-surface-variant p-8 space-y-6"
+              >
+                <div class="flex flex-col gap-2">
+                  <label
+                    class="font-label-md text-label-md uppercase text-secondary"
+                    >Correo Corporativo</label
+                  >
+                  <input
+                    class="bg-white border border-outline p-3 font-body-md text-on-surface focus:ring-0"
+                    placeholder="usuario@industrial.com"
+                    type="email"
+                  />
+                </div>
+                <div class="flex flex-col gap-2">
+                  <label
+                    class="font-label-md text-label-md uppercase text-secondary"
+                    >Teléfono de Emergencia</label
+                  >
+                  <div class="flex">
+                    <span
+                      class="bg-surface-container-high px-4 flex items-center border border-r-0 border-outline font-label-md"
+                      >+34</span
+                    >
+                    <input
+                      class="flex-1 bg-white border border-outline p-3 font-body-md text-on-surface focus:ring-0"
+                      placeholder="000 000 000"
+                      type="tel"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Actions -->
+            <div
+              class="flex flex-col md:flex-row items-center justify-between gap-4 pt-6"
+            >
+              <button
+                class="w-full md:w-auto px-10 py-4 border-2 border-inverse-surface font-label-md uppercase font-bold hover:bg-surface-container transition-colors"
+              >
+                Cancelar Proceso
+              </button>
+              <div class="flex w-full md:w-auto gap-4">
+                <button
+                  class="flex-1 md:flex-none px-12 py-4 bg-primary-container text-on-primary-fixed font-label-md uppercase font-black shadow-sm active:scale-95 transition-transform flex items-center justify-center gap-2"
+                >
+                  Siguiente Paso
+                  <span
+                    class="material-symbols-outlined"
+                    data-icon="arrow_forward"
+                    >arrow_forward</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Visual Industrial Context (Subtle) -->
+      <div
+        class="mt-20 border-t border-surface-variant bg-surface-container-low p-margin-edge"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 opacity-60">
+          <div class="space-y-2">
+            <p class="font-label-sm text-secondary uppercase">
+              Estado del Servidor
+            </p>
+            <p class="font-label-md font-bold">ACTIVO // ESTABLE</p>
+          </div>
+          <div class="space-y-2">
+            <p class="font-label-sm text-secondary uppercase">
+              Protocolo de Registro
+            </p>
+            <p class="font-label-md font-bold">AES-256 ENCRYPTION</p>
+          </div>
+          <div class="space-y-2">
+            <p class="font-label-sm text-secondary uppercase">
+              Última Auditoría
+            </p>
+            <p class="font-label-md font-bold">24 MAY 2024</p>
+          </div>
+          <div class="space-y-2 text-right">
+            <p class="font-label-sm text-secondary uppercase">Localización</p>
+            <p class="font-label-md font-bold">SECTOR_7_VALENCIA</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Bottom Navigation Bar (Mobile only) -->
+    <nav
+      class="fixed bottom-0 w-full z-50 lg:hidden bg-surface-container-lowest border-t border-surface-variant flex justify-around items-center h-16 px-4"
+    >
+      <a
+        class="flex flex-col items-center justify-center text-secondary p-2 transition-transform active:scale-95"
+        href="#"
+      >
+        <span class="material-symbols-outlined" data-icon="home_storage"
+          >home_storage</span
+        >
+        <span class="font-label-sm text-label-sm uppercase mt-1">INICIO</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container p-2 rounded-xl transition-transform active:scale-95"
+        href="#"
+      >
+        <span
+          class="material-symbols-outlined"
+          data-icon="person_add"
+          style="font-variation-settings: &quot;FILL&quot; 1"
+          >person_add</span
+        >
+        <span class="font-label-sm text-label-sm uppercase mt-1">REGISTRO</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-secondary p-2 transition-transform active:scale-95"
+        href="#"
+      >
+        <span class="material-symbols-outlined" data-icon="construction"
+          >construction</span
+        >
+        <span class="font-label-sm text-label-sm uppercase mt-1">GESTIÓN</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-secondary p-2 transition-transform active:scale-95"
+        href="#"
+      >
+        <span class="material-symbols-outlined" data-icon="warning"
+          >warning</span
+        >
+        <span class="font-label-sm text-label-sm uppercase mt-1">ALERTS</span>
+      </a>
+    </nav>
+  </body>
+</html>

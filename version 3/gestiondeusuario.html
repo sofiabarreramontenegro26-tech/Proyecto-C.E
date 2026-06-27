@@ -1,0 +1,811 @@
+<!doctype html>
+
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>INDUSTRIAL_OPS - Gestión de Usuarios</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      /* Custom scrollbar for industrial feel */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 0px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+      .industrial-grid {
+        background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-surface": "#2e3135",
+              "on-primary-fixed-variant": "#5a4300",
+              "primary-fixed": "#ffdf9a",
+              "on-primary-fixed": "#251a00",
+              "surface-bright": "#f8f9ff",
+              "surface-container-lowest": "#ffffff",
+              tertiary: "#505f76",
+              "on-tertiary-fixed-variant": "#38485d",
+              error: "#ba1a1a",
+              "tertiary-fixed": "#d3e4fe",
+              "outline-variant": "#d3c5ac",
+              "on-secondary-container": "#596373",
+              background: "#f8f9ff",
+              "tertiary-fixed-dim": "#b7c8e1",
+              "on-secondary-fixed-variant": "#3d4756",
+              "surface-container-highest": "#e1e2e8",
+              "on-surface-variant": "#4f4633",
+              "on-secondary-fixed": "#121c2a",
+              "inverse-primary": "#f7be1d",
+              "on-primary": "#ffffff",
+              "surface-container": "#eceef3",
+              "tertiary-container": "#acbcd6",
+              secondary: "#555f6f",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e1e2e8",
+              surface: "#f8f9ff",
+              "on-error-container": "#93000a",
+              "secondary-fixed": "#d9e3f6",
+              primary: "#785a00",
+              "on-background": "#191c20",
+              "on-primary-container": "#604700",
+              "on-tertiary-fixed": "#0b1c30",
+              "on-error": "#ffffff",
+              "surface-dim": "#d8dae0",
+              "secondary-container": "#d6e0f3",
+              "on-secondary": "#ffffff",
+              "primary-fixed-dim": "#f7be1d",
+              outline: "#817660",
+              "secondary-fixed-dim": "#bdc7d9",
+              "error-container": "#ffdad6",
+              "surface-tint": "#785a00",
+              "surface-container-high": "#e7e8ee",
+              "on-surface": "#191c20",
+              "surface-container-low": "#f2f3f9",
+              "on-tertiary-container": "#3c4c61",
+              "primary-container": "#eab308",
+              "inverse-on-surface": "#eff0f6",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              unit: "4px",
+              gutter: "24px",
+              "container-max": "1440px",
+              "margin-edge": "32px",
+            },
+            fontFamily: {
+              "label-sm": ["JetBrains Mono"],
+              "body-lg": ["IBM Plex Sans"],
+              "headline-xl": ["IBM Plex Sans"],
+              "headline-md": ["IBM Plex Sans"],
+              "body-md": ["IBM Plex Sans"],
+              "label-md": ["JetBrains Mono"],
+              "headline-lg": ["IBM Plex Sans"],
+            },
+            fontSize: {
+              "label-sm": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "label-md": [
+                "14px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-background font-body-md text-on-background min-h-screen flex">
+    <!-- NavigationDrawer Shell -->
+    <aside
+      class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-surface-variant flex flex-col py-6 gap-2 z-50"
+    >
+      <div class="px-6 mb-8">
+        <div class="flex items-center gap-3">
+          <span
+            class="material-symbols-outlined text-primary text-3xl"
+            data-icon="precision_manufacturing"
+            >precision_manufacturing</span
+          >
+          <span
+            class="font-headline-md text-headline-md font-black text-on-surface tracking-tighter"
+            >EQUIPMENT MGR</span
+          >
+        </div>
+      </div>
+      <nav class="flex-1 flex flex-col gap-1 px-3">
+        <!-- INICIO - ACTIVE -->
+        <a
+          class="flex items-center gap-4 px-4 py-3 bg-primary text-on-primary font-bold border-l-4 border-on-primary-fixed transition-all duration-200"
+          href="gestiondeusuario.html"
+        >
+          <span class="material-symbols-outlined" data-icon="dashboard"
+            >dashboard</span
+          >
+          <span class="font-label-md text-label-md uppercase tracking-widest"
+            >gestion usuarios</span
+          >
+        </a>
+        <!-- REGISTRO -->
+        <a
+          class="flex items-center gap-4 px-4 py-3 text-secondary hover:bg-surface-container transition-all duration-200 group"
+          href="historialconexion.html"
+        >
+          <span class="material-symbols-outlined" data-icon="person_add"
+            >person_add</span
+          >
+          <span
+            class="font-label-md text-label-md uppercase tracking-widest group-hover:text-on-surface"
+            >historial</span
+          >
+        </a>
+        <!-- GESTIÓN -->
+        <a
+          class="flex items-center gap-4 px-4 py-3 text-secondary hover:bg-surface-container transition-all duration-200 group"
+          href="registrosesion.html"
+        >
+          <span
+            class="material-symbols-outlined"
+            data-icon="admin_panel_settings"
+            >registro</span
+          >
+        </a>
+        <!-- HISTORIAL -->
+       
+      </nav>
+      <div class="px-4 mt-auto">
+        <div
+          class="p-4 bg-surface-container rounded-lg border border-outline-variant"
+        >
+          <div class="flex items-center gap-3 mb-2">
+            <div
+              class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold text-xs"
+            >
+              AD
+            </div>
+            <div class="overflow-hidden">
+              <p class="text-xs font-bold truncate">ADMIN_SYSTEM</p>
+              <p class="text-[10px] text-secondary truncate">
+                Nivel Acceso: 10
+              </p>
+            </div>
+          </div>
+          <button
+            class="w-full py-2 text-[10px] font-bold uppercase tracking-tighter border border-outline text-on-surface hover:bg-surface-variant transition-colors"
+          >
+            Cerrar Sesión
+          </button>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="ml-64 flex-1 min-h-screen flex flex-col">
+      <!-- TopAppBar -->
+      <header
+        class="w-full sticky top-0 z-40 bg-surface-container-lowest border-b border-surface-variant h-20 flex justify-between items-center px-margin-edge"
+      >
+        <div class="flex items-center gap-4">
+          <h1
+            class="font-headline-md text-headline-md font-bold tracking-tighter text-on-surface"
+          >
+            GESTIÓN DE USUARIOS
+          </h1>
+          <div class="h-6 w-[1px] bg-outline-variant"></div>
+          <div
+            class="flex items-center gap-2 px-3 py-1 bg-surface-container rounded border border-outline-variant"
+          >
+            <span
+              class="material-symbols-outlined text-sm text-primary"
+              data-icon="potted_plant"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >potted_plant</span
+            >
+            <span class="font-label-sm text-label-sm text-secondary uppercase"
+              >Planta Norte: Sector 04</span
+            >
+          </div>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="relative hidden md:block">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline"
+              data-icon="search"
+              >search</span
+            >
+            <input
+              class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant font-label-md text-label-md w-64 focus:ring-2 focus:ring-primary-container focus:border-primary outline-none transition-all"
+              placeholder="BUSCAR OPERARIO..."
+              type="text"
+            />
+          </div>
+          <button
+            class="material-symbols-outlined p-2 text-secondary hover:bg-surface-container-low rounded-full transition-colors"
+            data-icon="notifications"
+          >
+            notifications
+          </button>
+          <div
+            class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden"
+          >
+            <img
+              class="w-full h-full object-cover"
+              data-alt="A professional portrait of an industrial site manager wearing high-visibility gear and a white hard hat. The background is a clean, bright, technical office environment with architectural plans and digital screens. The lighting is crisp and modern, reflecting a premium enterprise software interface aesthetic with yellow and charcoal accents."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3aLU1WTsBsIFm0EPqL5vm14WhvSv6EXs2yiDSSPXxWtf67CtaDDNZiw48FYYwGGfxE8h4M7qd542mUkHrKduqWHr5ZG0KCtaxQhPkg9ykrz1bSkeMuFK_aLDzRJFtsgJ6QD5V2ZP_NKZPIZOmRauzQlPmkjoSFu29HPtYCIKWFfrY4AYc1DVtxsnu27udh61ih083bChZvo6GCe3R29UXvOm-KboxBEgAEgoiUEm14xOws5RsmQ0oCnw4ql85EIo3fxXdFhLQybI"
+            />
+          </div>
+        </div>
+      </header>
+      <!-- Content Area -->
+      <div class="p-gutter industrial-grid flex-1">
+        <!-- Dashboard Stats Summary (Bento Style) -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div
+            class="bg-surface-container-lowest border border-outline-variant p-6 flex flex-col gap-2"
+          >
+            <p class="font-label-sm text-label-sm text-secondary uppercase">
+              Usuarios Totales
+            </p>
+            <p class="font-headline-xl text-headline-xl text-on-surface">
+              1,284
+            </p>
+            <div class="mt-2 h-1 bg-surface-variant w-full">
+              <div class="h-full bg-primary w-3/4"></div>
+            </div>
+          </div>
+          <div
+            class="bg-surface-container-lowest border border-outline-variant p-6 flex flex-col gap-2"
+          >
+            <p class="font-label-sm text-label-sm text-secondary uppercase">
+              Ingenieros
+            </p>
+            <p class="font-headline-xl text-headline-xl text-on-surface">42</p>
+            <div class="mt-2 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-primary"></span>
+              <span class="text-xs font-label-md text-secondary uppercase"
+                >Altamente Cualificados</span
+              >
+            </div>
+          </div>
+          <div
+            class="bg-surface-container-lowest border border-outline-variant p-6 flex flex-col gap-2"
+          >
+            <p class="font-label-sm text-label-sm text-secondary uppercase">
+              En Turno Activo
+            </p>
+            <p class="font-headline-xl text-headline-xl text-on-surface">156</p>
+            <div
+              class="mt-2 flex items-center gap-1 text-green-600 font-label-sm"
+            >
+              <span
+                class="material-symbols-outlined text-sm"
+                data-icon="trending_up"
+                >trending_up</span
+              >
+              <span>+12% vs ayer</span>
+            </div>
+          </div>
+          <div
+            class="bg-primary-container border border-primary p-6 flex flex-col justify-between"
+          >
+            <div>
+              <p
+                class="font-label-sm text-label-sm text-on-primary-container uppercase font-bold"
+              >
+                Nueva Alta
+              </p>
+              <p class="font-body-md text-on-primary-container mt-1">
+                Registrar personal técnico en el sistema central.
+              </p>
+            </div>
+            <button
+              class="mt-4 bg-on-primary-container text-white py-2 px-4 font-label-md uppercase tracking-wider flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+            >
+              <span class="material-symbols-outlined" data-icon="add">add</span>
+              Añadir Usuario
+            </button>
+          </div>
+        </div>
+        <!-- Data Table Section -->
+        <section
+          class="bg-surface-container-lowest border border-outline-variant overflow-hidden"
+        >
+          <div
+            class="bg-surface-container-high px-6 py-4 border-b border-outline-variant flex justify-between items-center"
+          >
+            <h2
+              class="font-label-md text-label-md uppercase font-bold tracking-widest text-on-surface flex items-center gap-2"
+            >
+              <span
+                class="material-symbols-outlined text-primary"
+                data-icon="list_alt"
+                >list_alt</span
+              >
+              Registro de Personal Operativo
+            </h2>
+            <div class="flex gap-2">
+              <button
+                class="px-3 py-1 bg-surface-container-lowest border border-outline-variant font-label-sm text-label-sm uppercase hover:bg-surface-container-low transition-colors"
+              >
+                Exportar CSV
+              </button>
+              <button
+                class="px-3 py-1 bg-surface-container-lowest border border-outline-variant font-label-sm text-label-sm uppercase hover:bg-surface-container-low transition-colors"
+              >
+                Filtros
+              </button>
+            </div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-inverse-surface text-white">
+                  <th
+                    class="px-6 py-4 font-label-md text-label-md uppercase tracking-wider border-r border-outline/20"
+                  >
+                    ID_REF
+                  </th>
+                  <th
+                    class="px-6 py-4 font-label-md text-label-md uppercase tracking-wider border-r border-outline/20"
+                  >
+                    Nombre Completo
+                  </th>
+                  <th
+                    class="px-6 py-4 font-label-md text-label-md uppercase tracking-wider border-r border-outline/20"
+                  >
+                    Cargo / Rol
+                  </th>
+                  <th
+                    class="px-6 py-4 font-label-md text-label-md uppercase tracking-wider border-r border-outline/20"
+                  >
+                    Estado
+                  </th>
+                  <th
+                    class="px-6 py-4 font-label-md text-label-md uppercase tracking-wider border-r border-outline/20"
+                  >
+                    Última Conexión
+                  </th>
+                  <th
+                    class="px-6 py-4 font-label-md text-label-md uppercase tracking-wider text-center"
+                  >
+                    Acciones
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-surface-variant">
+                <!-- User 1 -->
+                <tr
+                  class="hover:bg-surface-container-low transition-colors group"
+                >
+                  <td class="px-6 py-4 font-label-md text-secondary">
+                    #OPS-9821
+                  </td>
+                  <td class="px-6 py-4 font-body-md font-bold text-on-surface">
+                    Carlos Mendoza Rivas
+                  </td>
+                  <td class="px-6 py-4">
+                    <span
+                      class="px-2 py-1 bg-secondary-container text-on-secondary-container font-label-sm text-xs border border-outline-variant uppercase"
+                      >Ingeniero</span
+                    >
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"
+                      ></span>
+                      <span class="font-label-sm text-xs uppercase"
+                        >Activo</span
+                      >
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 font-label-sm text-secondary">
+                    Hoy, 08:45 AM
+                  </td>
+                  <td class="px-6 py-4">
+                    <div
+                      class="flex justify-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity"
+                    >
+                      <button
+                        class="p-2 border border-outline-variant hover:bg-primary-container hover:border-primary transition-all rounded"
+                      >
+                        <span
+                          class="material-symbols-outlined text-sm"
+                          data-icon="edit"
+                          >edit</span
+                        >
+                      </button>
+                      <button
+                        class="p-2 border border-outline-variant hover:bg-error-container hover:text-error hover:border-error transition-all rounded"
+                      >
+                        <span
+                          class="material-symbols-outlined text-sm"
+                          data-icon="delete"
+                          >delete</span
+                        >
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- User 2 -->
+                <tr
+                  class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors group"
+                >
+                  <td class="px-6 py-4 font-label-md text-secondary">
+                    #OPS-7742
+                  </td>
+                  <td class="px-6 py-4 font-body-md font-bold text-on-surface">
+                    Beatriz Soler Vega
+                  </td>
+                  <td class="px-6 py-4">
+                    <span
+                      class="px-2 py-1 bg-tertiary-container text-on-tertiary-container font-label-sm text-xs border border-outline-variant uppercase"
+                      >Supervisor</span
+                    >
+                  </td>
+                  <td class="px-6 py-4">
+                    <div
+                      class="flex items-center gap-2 text-secondary opacity-50"
+                    >
+                      <span class="w-2 h-2 rounded-full bg-outline"></span>
+                      <span class="font-label-sm text-xs uppercase"
+                        >Inactivo</span
+                      >
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 font-label-sm text-secondary">
+                    Hace 2 días
+                  </td>
+                  <td class="px-6 py-4">
+                    <div
+                      class="flex justify-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity"
+                    >
+                      <button
+                        class="p-2 border border-outline-variant hover:bg-primary-container hover:border-primary transition-all rounded"
+                      >
+                        <span
+                          class="material-symbols-outlined text-sm"
+                          data-icon="edit"
+                          >edit</span
+                        >
+                      </button>
+                      <button
+                        class="p-2 border border-outline-variant hover:bg-error-container hover:text-error hover:border-error transition-all rounded"
+                      >
+                        <span
+                          class="material-symbols-outlined text-sm"
+                          data-icon="delete"
+                          >delete</span
+                        >
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- User 3 -->
+                <tr
+                  class="hover:bg-surface-container-low transition-colors group"
+                >
+                  <td class="px-6 py-4 font-label-md text-secondary">
+                    #OPS-4421
+                  </td>
+                  <td class="px-6 py-4 font-body-md font-bold text-on-surface">
+                    Javier Ortiz Luna
+                  </td>
+                  <td class="px-6 py-4">
+                    <span
+                      class="px-2 py-1 bg-surface-container-highest text-on-surface-variant font-label-sm text-xs border border-outline-variant uppercase"
+                      >Técnico</span
+                    >
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"
+                      ></span>
+                      <span class="font-label-sm text-xs uppercase"
+                        >Activo</span
+                      >
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 font-label-sm text-secondary">
+                    Hoy, 09:12 AM
+                  </td>
+                  <td class="px-6 py-4">
+                    <div
+                      class="flex justify-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity"
+                    >
+                      <button
+                        class="p-2 border border-outline-variant hover:bg-primary-container hover:border-primary transition-all rounded"
+                      >
+                        <span
+                          class="material-symbols-outlined text-sm"
+                          data-icon="edit"
+                          >edit</span
+                        >
+                      </button>
+                      <button
+                        class="p-2 border border-outline-variant hover:bg-error-container hover:text-error hover:border-error transition-all rounded"
+                      >
+                        <span
+                          class="material-symbols-outlined text-sm"
+                          data-icon="delete"
+                          >delete</span
+                        >
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <!-- User 4 -->
+                <tr
+                  class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors group"
+                >
+                  <td class="px-6 py-4 font-label-md text-secondary">
+                    #OPS-1109
+                  </td>
+                  <td class="px-6 py-4 font-body-md font-bold text-on-surface">
+                    Lucía Ferreyra
+                  </td>
+                  <td class="px-6 py-4">
+                    <span
+                      class="px-2 py-1 bg-surface-container-highest text-on-surface-variant font-label-sm text-xs border border-outline-variant uppercase"
+                      >Técnico</span
+                    >
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"
+                      ></span>
+                      <span class="font-label-sm text-xs uppercase"
+                        >Activo</span
+                      >
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 font-label-sm text-secondary">
+                    Ayer, 04:30 PM
+                  </td>
+                  <td class="px-6 py-4">
+                    <div
+                      class="flex justify-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity"
+                    >
+                      <button
+                        class="p-2 border border-outline-variant hover:bg-primary-container hover:border-primary transition-all rounded"
+                      >
+                        <span
+                          class="material-symbols-outlined text-sm"
+                          data-icon="edit"
+                          >edit</span
+                        >
+                      </button>
+                      <button
+                        class="p-2 border border-outline-variant hover:bg-error-container hover:text-error hover:border-error transition-all rounded"
+                      >
+                        <span
+                          class="material-symbols-outlined text-sm"
+                          data-icon="delete"
+                          >delete</span
+                        >
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div
+            class="p-4 bg-surface-container-low border-t border-outline-variant flex justify-between items-center"
+          >
+            <p class="font-label-sm text-label-sm text-secondary">
+              MOSTRANDO 1-10 DE 1,284 USUARIOS
+            </p>
+            <div class="flex gap-1">
+              <button
+                class="w-8 h-8 flex items-center justify-center border border-outline-variant bg-surface-container-lowest hover:bg-primary-container transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-sm"
+                  data-icon="chevron_left"
+                  >chevron_left</span
+                >
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center border border-primary bg-primary text-on-primary font-bold text-xs"
+              >
+                1
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center border border-outline-variant bg-surface-container-lowest hover:bg-surface-container transition-colors text-xs"
+              >
+                2
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center border border-outline-variant bg-surface-container-lowest hover:bg-surface-container transition-colors text-xs"
+              >
+                3
+              </button>
+              <button
+                class="w-8 h-8 flex items-center justify-center border border-outline-variant bg-surface-container-lowest hover:bg-primary-container transition-colors"
+              >
+                <span
+                  class="material-symbols-outlined text-sm"
+                  data-icon="chevron_right"
+                  >chevron_right</span
+                >
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- System Status Footer -->
+      <footer
+        class="h-12 bg-inverse-surface text-white flex items-center px-margin-edge justify-between"
+      >
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2">
+            <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+            <span
+              class="font-label-sm text-[10px] uppercase tracking-widest text-surface-container-highest"
+              >SISTEMA ONLINE - RESPUESTA: 14ms</span
+            >
+          </div>
+          <div class="h-4 w-[1px] bg-white/20"></div>
+          <span
+            class="font-label-sm text-[10px] uppercase text-surface-container-highest"
+            >DB_SYNC: OK</span
+          >
+        </div>
+        <div
+          class="font-label-sm text-[10px] uppercase text-surface-container-highest opacity-60"
+        >
+          v4.8.2-STABLE | © INDUSTRIAL_OPS 2024
+        </div>
+      </footer>
+    </main>
+    <!-- BottomNavBar (Mobile only suppression check - shown only for illustration of the logic mentioned) -->
+    <nav
+      class="fixed bottom-0 w-full z-50 lg:hidden bg-surface-container-lowest border-t border-surface-variant flex justify-around items-center h-16 px-4"
+    >
+      <a
+        class="flex flex-col items-center justify-center text-secondary p-2 active:bg-surface-container-high transition-transform scale-95"
+        href="#"
+      >
+        <span class="material-symbols-outlined" data-icon="home_storage"
+          >home_storage</span
+        >
+        <span class="font-label-sm text-label-sm uppercase">INICIO</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-secondary p-2 active:bg-surface-container-high transition-transform scale-95"
+        href="#"
+      >
+        <span class="material-symbols-outlined" data-icon="handyman"
+          >handyman</span
+        >
+        <span class="font-label-sm text-label-sm uppercase">HERRAM.</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center bg-primary text-on-primary p-2 rounded-xl active:bg-surface-container-high transition-transform scale-95"
+        href="#"
+      >
+        <span
+          class="material-symbols-outlined"
+          data-icon="group"
+          style="font-variation-settings: &quot;FILL&quot; 1"
+          >group</span
+        >
+        <span class="font-label-sm text-label-sm uppercase font-bold"
+          >GESTIÓN</span
+        >
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-secondary p-2 active:bg-surface-container-high transition-transform scale-95"
+        href="#"
+      >
+        <span class="material-symbols-outlined" data-icon="warning"
+          >warning</span
+        >
+        <span class="font-label-sm text-label-sm uppercase">AVISOS</span>
+      </a>
+    </nav>
+    <script>
+      // Simple interactive feedback for table rows
+      document.querySelectorAll("tbody tr").forEach((row) => {
+        row.addEventListener("click", (e) => {
+          // Prevent trigger if clicking action buttons
+          if (e.target.closest("button")) return;
+
+          // Toggle a focused state or show details (simulated)
+          console.log(
+            "Fila seleccionada:",
+            row.querySelector("td:nth-child(2)").innerText,
+          );
+        });
+      });
+
+      // Search input micro-interaction
+      const searchInput = document.querySelector('input[type="text"]');
+      searchInput.addEventListener("focus", () => {
+        searchInput.parentElement.classList.add(
+          "ring-2",
+          "ring-primary-container",
+        );
+      });
+      searchInput.addEventListener("blur", () => {
+        searchInput.parentElement.classList.remove(
+          "ring-2",
+          "ring-primary-container",
+        );
+      });
+    </script>
+  </body>
+</html>

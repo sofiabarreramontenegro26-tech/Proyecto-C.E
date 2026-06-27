@@ -1,0 +1,780 @@
+<!doctype html>
+
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Historial y Conexión | INDUSTRIAL_OPS</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-surface": "#2e3135",
+              "on-primary-fixed-variant": "#5a4300",
+              "primary-fixed": "#ffdf9a",
+              "on-primary-fixed": "#251a00",
+              "surface-bright": "#f8f9ff",
+              "surface-container-lowest": "#ffffff",
+              tertiary: "#505f76",
+              "on-tertiary-fixed-variant": "#38485d",
+              error: "#ba1a1a",
+              "tertiary-fixed": "#d3e4fe",
+              "outline-variant": "#d3c5ac",
+              "on-secondary-container": "#596373",
+              background: "#f8f9ff",
+              "tertiary-fixed-dim": "#b7c8e1",
+              "on-secondary-fixed-variant": "#3d4756",
+              "surface-container-highest": "#e1e2e8",
+              "on-surface-variant": "#4f4633",
+              "on-secondary-fixed": "#121c2a",
+              "inverse-primary": "#f7be1d",
+              "on-primary": "#ffffff",
+              "surface-container": "#eceef3",
+              "tertiary-container": "#acbcd6",
+              secondary: "#555f6f",
+              "on-tertiary": "#ffffff",
+              "surface-variant": "#e1e2e8",
+              surface: "#f8f9ff",
+              "on-error-container": "#93000a",
+              "secondary-fixed": "#d9e3f6",
+              primary: "#785a00",
+              "on-background": "#191c20",
+              "on-primary-container": "#604700",
+              "on-tertiary-fixed": "#0b1c30",
+              "on-error": "#ffffff",
+              "surface-dim": "#d8dae0",
+              "secondary-container": "#d6e0f3",
+              "on-secondary": "#ffffff",
+              "primary-fixed-dim": "#f7be1d",
+              outline: "#817660",
+              "secondary-fixed-dim": "#bdc7d9",
+              "error-container": "#ffdad6",
+              "surface-tint": "#785a00",
+              "surface-container-high": "#e7e8ee",
+              "on-surface": "#191c20",
+              "surface-container-low": "#f2f3f9",
+              "on-tertiary-container": "#3c4c61",
+              "primary-container": "#eab308",
+              "inverse-on-surface": "#eff0f6",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              unit: "4px",
+              gutter: "24px",
+              "container-max": "1440px",
+              "margin-edge": "32px",
+            },
+            fontFamily: {
+              "label-sm": ["JetBrains Mono"],
+              "body-lg": ["IBM Plex Sans"],
+              "headline-xl": ["IBM Plex Sans"],
+              "headline-md": ["IBM Plex Sans"],
+              "body-md": ["IBM Plex Sans"],
+              "label-md": ["JetBrains Mono"],
+              "headline-lg": ["IBM Plex Sans"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-background text-on-background font-body-md overflow-hidden h-screen flex"
+  >
+    <!-- Sidebar Navigation -->
+    <!-- Applying Shared Component Logic: NavigationDrawer Mapping -->
+    <aside
+      class="h-screen w-64 bg-surface-container-lowest border-r border-surface-variant flex flex-col py-6 gap-2 shrink-0 z-50"
+    >
+      <div class="px-6 mb-8">
+        <h1
+          class="font-headline-md text-headline-md font-black text-on-surface tracking-tighter"
+        >
+          EQUIPMENT MGR
+        </h1>
+      </div>
+      <nav class="flex-1 flex flex-col gap-1 px-3">
+        <!-- GESTION -->
+        <a
+          class="flex items-center gap-4 px-4 py-3 text-secondary hover:bg-surface-container transition-all duration-200 group"
+          href="gestiondeusuario.html"
+        >
+          <span class="material-symbols-outlined" data-icon="dashboard"
+            >dashboard</span
+          >
+          <span class="font-label-md text-label-md uppercase tracking-widest"
+            >gestion usuarios</span
+          >
+        </a>
+        <!-- HISTORIAL -->
+        <a
+          class="flex items-center gap-4 px-4 py-3 bg-primary text-on-primary font-bold border-l-4 border-on-primary-fixed transition-all duration-200"
+          href="historialconexion.html"
+        >
+          <span class="material-symbols-outlined" data-icon="person_add"
+            >person_add</span
+          >
+          <span
+            class="font-label-md text-label-md uppercase tracking-widest group-hover:text-on-surface"
+            >historial</span
+          >
+        </a>
+        <!-- REGISTRO -->
+        <a
+          class="flex items-center gap-4 px-4 py-3 text-secondary hover:bg-surface-container transition-all duration-200 group"
+          href="registrosesion.html"
+        >
+          <span
+            class="material-symbols-outlined"
+            data-icon="admin_panel_settings"
+            >registro</span
+          >
+        </a>
+      </nav>
+      <div class="mt-auto px-6 pt-6 border-t border-surface-variant">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container"
+          >
+            <span class="material-symbols-outlined" data-icon="person"
+              >person</span
+            >
+          </div>
+          <div class="overflow-hidden">
+            <p class="font-label-md text-label-md font-bold truncate">
+              OP_MANAGER_04
+            </p>
+            <p class="font-label-sm text-label-sm text-secondary truncate">
+              NIVEL 4
+            </p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col min-w-0 overflow-y-auto relative">
+      <!-- TopAppBar Placeholder Context -->
+      <header
+        class="w-full sticky top-0 z-40 bg-surface-container-lowest border-b border-surface-variant flex justify-between items-center px-margin-edge h-20"
+      >
+        <div class="flex items-center gap-4">
+          <span
+            class="material-symbols-outlined text-primary"
+            data-icon="precision_manufacturing"
+            >precision_manufacturing</span
+          >
+          <h2
+            class="font-headline-md text-headline-md font-bold tracking-tighter text-on-surface uppercase"
+          >
+            INDUSTRIAL_OPS // HISTORIAL
+          </h2>
+        </div>
+        <div class="flex items-center gap-6">
+          <div
+            class="flex items-center gap-2 bg-surface-container-low px-4 py-2 rounded-lg border border-outline-variant"
+          >
+            <span
+              class="w-2 h-2 rounded-full bg-green-600 animate-pulse"
+            ></span>
+            <span
+              class="font-label-md text-label-md text-on-surface uppercase tracking-wider"
+              >SISTEMA: OPERATIVO</span
+            >
+          </div>
+          <div
+            class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center"
+          >
+            <span class="material-symbols-outlined" data-icon="search"
+              >search</span
+            >
+          </div>
+        </div>
+      </header>
+      <!-- Content Canvas -->
+      <div class="p-8 space-y-8 max-w-[1440px] mx-auto w-full">
+        <!-- Connection Status Grid -->
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+          <!-- Uptime Metric -->
+          <div
+            class="md:col-span-3 bg-white border border-outline-variant p-6 flex flex-col justify-between"
+          >
+            <div class="flex justify-between items-start mb-4">
+              <span
+                class="font-label-sm text-label-sm text-secondary uppercase tracking-widest"
+                >DISPONIBILIDAD (UPTIME)</span
+              >
+              <span
+                class="material-symbols-outlined text-primary"
+                data-icon="timer"
+                >timer</span
+              >
+            </div>
+            <div>
+              <p class="text-4xl font-bold tracking-tight text-on-surface">
+                99.98<span class="text-xl text-secondary">%</span>
+              </p>
+              <div class="mt-4 h-1 bg-surface-variant relative overflow-hidden">
+                <div
+                  class="absolute inset-y-0 left-0 bg-primary-container w-[99.98%]"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <!-- Latency Graph -->
+          <div class="md:col-span-6 bg-white border border-outline-variant">
+            <div
+              class="px-6 py-4 border-b border-outline-variant bg-surface-container-low flex justify-between items-center"
+            >
+              <span
+                class="font-label-sm text-label-sm text-on-surface font-bold uppercase tracking-widest"
+                >LATENCIA DE RED (REAL-TIME)</span
+              >
+              <div class="flex items-center gap-2">
+                <span class="text-green-600 font-label-sm text-label-sm"
+                  >● 14ms PROMEDIO</span
+                >
+              </div>
+            </div>
+            <div class="p-6 h-40 flex items-end gap-1">
+              <!-- Pseudo-graph -->
+              <div
+                class="bg-surface-variant w-full h-[40%]"
+                style="transition: height 1s ease"
+              ></div>
+              <div class="bg-surface-variant w-full h-[55%]"></div>
+              <div class="bg-primary-container w-full h-[45%]"></div>
+              <div class="bg-surface-variant w-full h-[60%]"></div>
+              <div class="bg-surface-variant w-full h-[30%]"></div>
+              <div class="bg-surface-variant w-full h-[45%]"></div>
+              <div class="bg-primary-container w-full h-[35%]"></div>
+              <div class="bg-surface-variant w-full h-[50%]"></div>
+              <div class="bg-surface-variant w-full h-[65%]"></div>
+              <div class="bg-primary-container w-full h-[40%]"></div>
+              <div class="bg-surface-variant w-full h-[30%]"></div>
+              <div class="bg-surface-variant w-full h-[45%]"></div>
+            </div>
+          </div>
+          <!-- Connection Status Summary -->
+          <div class="md:col-span-3 bg-white border border-outline-variant p-6">
+            <span
+              class="font-label-sm text-label-sm text-secondary uppercase tracking-widest block mb-4"
+              >ESTADO DE NODOS</span
+            >
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="font-body-md text-on-surface">Nodo Central</span>
+                <span
+                  class="font-label-sm text-label-sm px-2 py-0.5 bg-green-100 text-green-700 border border-green-200"
+                  >ACTIVO</span
+                >
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-body-md text-on-surface">PLC Pasarela</span>
+                <span
+                  class="font-label-sm text-label-sm px-2 py-0.5 bg-green-100 text-green-700 border border-green-200"
+                  >ACTIVO</span
+                >
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="font-body-md text-on-surface">Sensor Array B</span>
+                <span
+                  class="font-label-sm text-label-sm px-2 py-0.5 bg-primary-fixed text-on-primary-fixed-variant border border-primary-container"
+                  >SYNC</span
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Audit Log and Detailed History -->
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-gutter">
+          <!-- Real-time Audit Log (Left Sidebar Style) -->
+          <section
+            class="xl:col-span-1 bg-white border border-outline-variant flex flex-col max-h-[600px]"
+          >
+            <div
+              class="p-6 border-b border-outline-variant bg-surface-container-low"
+            >
+              <h3
+                class="font-headline-md text-headline-md font-bold tracking-tight text-on-surface"
+              >
+                AUDITORÍA VIVA
+              </h3>
+              <p
+                class="font-label-sm text-label-sm text-secondary uppercase tracking-tighter"
+              >
+                Eventos en cola de procesamiento
+              </p>
+            </div>
+            <div class="flex-1 overflow-y-auto p-0">
+              <!-- Audit Rows -->
+              <div
+                class="p-4 border-b border-surface-variant hover:bg-surface-container transition-colors flex gap-4"
+              >
+                <div class="mt-1">
+                  <span
+                    class="material-symbols-outlined text-green-600 scale-75"
+                    data-icon="check_circle"
+                    >check_circle</span
+                  >
+                </div>
+                <div>
+                  <p class="font-label-md text-label-md text-on-surface">
+                    Sincronización de Base de Datos finalizada
+                  </p>
+                  <p class="font-label-sm text-label-sm text-secondary">
+                    Hace 2m · ID: #88219
+                  </p>
+                </div>
+              </div>
+              <div
+                class="p-4 border-b border-surface-variant hover:bg-surface-container transition-colors flex gap-4"
+              >
+                <div class="mt-1">
+                  <span
+                    class="material-symbols-outlined text-primary scale-75"
+                    data-icon="info"
+                    >info</span
+                  >
+                </div>
+                <div>
+                  <p class="font-label-md text-label-md text-on-surface">
+                    Petición de usuario: OP_MGR_04 cambió parámetros
+                  </p>
+                  <p class="font-label-sm text-label-sm text-secondary">
+                    Hace 8m · ID: #88218
+                  </p>
+                </div>
+              </div>
+              <div
+                class="p-4 border-b border-surface-variant hover:bg-surface-container transition-colors bg-error-container/10 border-l-4 border-l-error flex gap-4"
+              >
+                <div class="mt-1">
+                  <span
+                    class="material-symbols-outlined text-error scale-75"
+                    data-icon="warning"
+                    >warning</span
+                  >
+                </div>
+                <div>
+                  <p
+                    class="font-label-md text-label-md text-on-surface font-bold"
+                  >
+                    Fallo de lectura: Sensor Humedad B2
+                  </p>
+                  <p class="font-label-sm text-label-sm text-error">
+                    Hace 15m · ID: #88215
+                  </p>
+                </div>
+              </div>
+              <div
+                class="p-4 border-b border-surface-variant hover:bg-surface-container transition-colors flex gap-4"
+              >
+                <div class="mt-1">
+                  <span
+                    class="material-symbols-outlined text-secondary scale-75"
+                    data-icon="history"
+                    >history</span
+                  >
+                </div>
+                <div>
+                  <p class="font-label-md text-label-md text-on-surface">
+                    Backup programado iniciado correctamente
+                  </p>
+                  <p class="font-label-sm text-label-sm text-secondary">
+                    Hace 45m · ID: #88210
+                  </p>
+                </div>
+              </div>
+              <div
+                class="p-4 border-b border-surface-variant hover:bg-surface-container transition-colors flex gap-4"
+              >
+                <div class="mt-1">
+                  <span
+                    class="material-symbols-outlined text-green-600 scale-75"
+                    data-icon="check_circle"
+                    >check_circle</span
+                  >
+                </div>
+                <div>
+                  <p class="font-label-md text-label-md text-on-surface">
+                    Actualización de Firmware v2.4.1 aplicada
+                  </p>
+                  <p class="font-label-sm text-label-sm text-secondary">
+                    Hace 1h · ID: #88201
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- Detailed History Table (Main Content Style) -->
+          <section
+            class="xl:col-span-2 bg-white border border-outline-variant overflow-hidden flex flex-col"
+          >
+            <div
+              class="px-6 py-4 border-b border-outline-variant bg-inverse-surface flex justify-between items-center"
+            >
+              <div class="flex items-center gap-3">
+                <span
+                  class="material-symbols-outlined text-primary-fixed-dim"
+                  data-icon="storage"
+                  >storage</span
+                >
+                <h3
+                  class="font-label-md text-label-md text-white font-bold uppercase tracking-widest"
+                >
+                  HISTORIAL DE OPERACIONES DETALLADO
+                </h3>
+              </div>
+              <div class="flex gap-2">
+                <button
+                  class="bg-primary text-black px-4 py-1.5 font-label-sm text-label-sm font-bold uppercase flex items-center gap-2 hover:bg-primary-container transition-colors"
+                >
+                  <span
+                    class="material-symbols-outlined text-[18px]"
+                    data-icon="download"
+                    >download</span
+                  >
+                  EXPORTAR CSV
+                </button>
+              </div>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr
+                    class="bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"
+                  >
+                    <th
+                      class="px-6 py-4 font-medium border-b border-outline-variant"
+                    >
+                      MARCA DE TIEMPO
+                    </th>
+                    <th
+                      class="px-6 py-4 font-medium border-b border-outline-variant"
+                    >
+                      MÓDULO
+                    </th>
+                    <th
+                      class="px-6 py-4 font-medium border-b border-outline-variant"
+                    >
+                      ACCION
+                    </th>
+                    <th
+                      class="px-6 py-4 font-medium border-b border-outline-variant"
+                    >
+                      USUARIO
+                    </th>
+                    <th
+                      class="px-6 py-4 font-medium border-b border-outline-variant"
+                    >
+                      ESTADO
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-surface-variant font-body-md">
+                  <tr class="hover:bg-surface-container-low transition-colors">
+                    <td class="px-6 py-4 font-label-sm text-label-sm">
+                      24/05/2024 14:32:01
+                    </td>
+                    <td class="px-6 py-4">LOGÍSTICA</td>
+                    <td class="px-6 py-4">Despacho de Envío #F82</td>
+                    <td class="px-6 py-4">SYS_AUTO</td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                        <span class="font-label-sm text-label-sm uppercase"
+                          >COMPLETO</span
+                        >
+                      </div>
+                    </td>
+                  </tr>
+                  <tr
+                    class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors"
+                  >
+                    <td class="px-6 py-4 font-label-sm text-label-sm">
+                      24/05/2024 14:15:22
+                    </td>
+                    <td class="px-6 py-4">MANTENIMIENTO</td>
+                    <td class="px-6 py-4">Calibración de Brazo #04</td>
+                    <td class="px-6 py-4">OP_MGR_04</td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-primary"></span>
+                        <span class="font-label-sm text-label-sm uppercase"
+                          >PROCESANDO</span
+                        >
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-surface-container-low transition-colors">
+                    <td class="px-6 py-4 font-label-sm text-label-sm">
+                      24/05/2024 13:58:10
+                    </td>
+                    <td class="px-6 py-4">SEGURIDAD</td>
+                    <td class="px-6 py-4">Acceso Puerta Nivel 2</td>
+                    <td class="px-6 py-4">USER_9281</td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                        <span class="font-label-sm text-label-sm uppercase"
+                          >AUTORIZADO</span
+                        >
+                      </div>
+                    </td>
+                  </tr>
+                  <tr
+                    class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors"
+                  >
+                    <td class="px-6 py-4 font-label-sm text-label-sm">
+                      24/05/2024 13:45:00
+                    </td>
+                    <td class="px-6 py-4">SISTEMA</td>
+                    <td class="px-6 py-4">Reinicio Programado</td>
+                    <td class="px-6 py-4">KERN_ROOT</td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+                        <span class="font-label-sm text-label-sm uppercase"
+                          >FINALIZADO</span
+                        >
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-surface-container-low transition-colors">
+                    <td class="px-6 py-4 font-label-sm text-label-sm">
+                      24/05/2024 13:20:45
+                    </td>
+                    <td class="px-6 py-4">RECURSOS</td>
+                    <td class="px-6 py-4">Ajuste de Voltaje Fase 3</td>
+                    <td class="px-6 py-4">OP_MGR_01</td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-error"></span>
+                        <span class="font-label-sm text-label-sm uppercase"
+                          >ERROR CRITICO</span
+                        >
+                      </div>
+                    </td>
+                  </tr>
+                  <tr
+                    class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors"
+                  >
+                    <td class="px-6 py-4 font-label-sm text-label-sm">
+                      24/05/2024 12:55:12
+                    </td>
+                    <td class="px-6 py-4">INVENTARIO</td>
+                    <td class="px-6 py-4">Ingreso de Material Raw_40</td>
+                    <td class="px-6 py-4">WH_MGR</td>
+                    <td class="px-6 py-4">
+                      <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                        <span class="font-label-sm text-label-sm uppercase"
+                          >VERIFICADO</span
+                        >
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div
+              class="px-6 py-4 bg-surface-container-low border-t border-outline-variant flex justify-between items-center"
+            >
+              <span class="font-label-sm text-label-sm text-secondary uppercase"
+                >MOSTRANDO 1-20 DE 54,203 REGISTROS</span
+              >
+              <div class="flex gap-2">
+                <button
+                  class="w-10 h-10 border border-outline-variant flex items-center justify-center hover:bg-white"
+                >
+                  <span
+                    class="material-symbols-outlined"
+                    data-icon="chevron_left"
+                    >chevron_left</span
+                  >
+                </button>
+                <button
+                  class="w-10 h-10 bg-primary text-black font-bold border border-primary-container flex items-center justify-center"
+                >
+                  1
+                </button>
+                <button
+                  class="w-10 h-10 border border-outline-variant flex items-center justify-center hover:bg-white font-bold"
+                >
+                  2
+                </button>
+                <button
+                  class="w-10 h-10 border border-outline-variant flex items-center justify-center hover:bg-white font-bold"
+                >
+                  3
+                </button>
+                <button
+                  class="w-10 h-10 border border-outline-variant flex items-center justify-center hover:bg-white"
+                >
+                  <span
+                    class="material-symbols-outlined"
+                    data-icon="chevron_right"
+                    >chevron_right</span
+                  >
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- Asymmetric Data Insights Row -->
+        <section class="grid grid-cols-1 lg:grid-cols-4 gap-gutter">
+          <div
+            class="lg:col-span-2 bg-primary border border-primary-container p-8 relative overflow-hidden group"
+          >
+            <div class="relative z-10">
+              <h4
+                class="font-headline-lg text-headline-lg text-black font-black mb-2 uppercase italic tracking-tighter"
+              >
+                ANÁLISIS DE EFICIENCIA
+              </h4>
+              <p class="text-black/80 max-w-md mb-6 font-body-md">
+                El sistema ha registrado un incremento del 12.4% en la velocidad
+                de conexión durante las últimas 48 horas tras el ajuste de
+                balanceo de carga.
+              </p>
+              <button
+                class="bg-black text-white px-6 py-3 font-label-md text-label-md font-bold uppercase tracking-widest hover:bg-zinc-800 transition-colors"
+              >
+                VER REPORTE COMPLETO
+              </button>
+            </div>
+            <!-- Industrial Decorative Element -->
+            <span
+              class="material-symbols-outlined absolute -bottom-10 -right-10 text-[200px] text-black/5 pointer-events-none group-hover:rotate-12 transition-transform duration-700"
+              data-icon="trending_up"
+              >trending_up</span
+            >
+          </div>
+          <div
+            class="bg-white border border-outline-variant p-6 flex flex-col justify-between"
+          >
+            <span
+              class="font-label-sm text-label-sm text-secondary uppercase tracking-widest"
+              >MAPA DE CONEXIÓN GLOBAL</span
+            >
+            <div
+              class="h-32 mt-4 bg-surface-container flex items-center justify-center overflow-hidden grayscale contrast-125 opacity-80 border border-outline-variant"
+            >
+              <!-- Simulation of a map view -->
+              <div
+                class="w-full h-full bg-cover bg-center"
+                data-alt="A minimalist industrial technical map showing stylized geographical outlines of Europe and North America with sharp vector connection lines between major cities. The style is strictly light mode, high contrast, using only grayscale and primary yellow accents. No gradients, just hard-edged technical cartography."
+                style="
+                  background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAxdQfr2zT_X6FStA13h6D364WXH0kgkjXmcAm-2hvmXR9HdFj8g5wLZE3eSbTj5V0vxku6CNAM_VBG4y_4JvFeNWpxQstx4wCItLQJorvOEjEh6DfiQ375hOJd5UO1KSiwvO-Ntx-RLiRwde-dkTs9-MRHzabykITeOnb9IM_VkYoS83UiAK8iAQ4OOqiKfSm4zSOShh2mop20T6LpzRmWypiHMzbRuTyCjQJLB1ZGyyF3ARm_nPkw6RheNziaIwdXBawz5AtGdvA&quot;);
+                "
+              ></div>
+            </div>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="font-label-md text-label-md">3 NODOS EXTERNOS</span>
+              <span class="font-label-sm text-label-sm text-green-600 font-bold"
+                >ACTIVOS</span
+              >
+            </div>
+          </div>
+          <div
+            class="bg-inverse-surface border border-zinc-900 p-6 flex flex-col justify-between"
+          >
+            <div class="flex items-center gap-2 text-primary-fixed-dim">
+              <span
+                class="material-symbols-outlined"
+                data-icon="security_update_good"
+                >security_update_good</span
+              >
+              <span
+                class="font-label-sm text-label-sm uppercase tracking-widest"
+                >SEGURIDAD DE CAPA</span
+              >
+            </div>
+            <div class="mt-4">
+              <p class="text-3xl font-bold text-white tracking-tight">
+                AES-256
+              </p>
+              <p
+                class="font-label-sm text-label-sm text-zinc-400 mt-1 uppercase"
+              >
+                PROTOCOL: TLS 1.3
+              </p>
+            </div>
+            <div class="mt-6 flex gap-1">
+              <div class="h-1 flex-1 bg-primary"></div>
+              <div class="h-1 flex-1 bg-primary"></div>
+              <div class="h-1 flex-1 bg-primary"></div>
+              <div class="h-1 flex-1 bg-zinc-700"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <!-- Footer Padding -->
+      <div class="h-12 w-full"></div>
+    </main>
+    <!-- FAB Suppression: Not rendering FAB on History/Audit Screen as per UX guidelines -->
+    <!-- Interactive Layer / Micro-interactions -->
+    <script>
+      // Simple micro-interaction for the graph bars
+      document
+        .querySelectorAll(".bg-surface-variant, .bg-primary-container")
+        .forEach((bar) => {
+          if (bar.classList.contains("w-full")) {
+            // Only act on the graph bars
+            setInterval(
+              () => {
+                const newHeight = Math.floor(Math.random() * 60) + 20;
+                bar.style.height = newHeight + "%";
+              },
+              3000 + Math.random() * 2000,
+            );
+          }
+        });
+
+      // Add hover effect sounds or subtle visuals if desired,
+      // but keeping it 'Industrial' and 'Clean' means minimal fluff.
+    </script>
+  </body>
+</html>
